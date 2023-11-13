@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Personal Restaurant Guide</string>
+    <string name="about_title">Team Members:</string>
+    <string name="diego_name">Diego Fuentes</string>
+    <string name="hiu_name">Hiu Wai Lau</string>
+    <string name="yang_name">Yang Hai</string>
+    <string name="chloe_name">Chloe Zeng</string>
 </resources>
