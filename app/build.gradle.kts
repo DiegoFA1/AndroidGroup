@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "georgebrown.group7.personalrestaurantguide"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "georgebrown.group7.personalrestaurantguide"
