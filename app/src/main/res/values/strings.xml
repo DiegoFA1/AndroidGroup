@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Personal Restaurant Guide</string>
+
+    <string name="main_restaurant">All Restaurants</string>
+    <string name="main_favourites">Favourites</string>
+    <string name="main_search">Places to try</string>
+
     <string name="about_title">Team Members:</string>
     <string name="diego_name">Diego Fuentes</string>
     <string name="hiu_name">Hiu Wai Lau</string>

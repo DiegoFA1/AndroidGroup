@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,42 +14,57 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_below="@id/main_toolbar"
+        android:layout_marginTop="60dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/list_icon"
-            android:text="TextView"
-            android:textAlignment="center" />
+            android:layout_marginBottom="25dp"
+            android:drawablePadding="12dp"
+            android:text="@string/main_restaurant"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            app:drawableLeftCompat="@drawable/list_icon" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/favorite_icon"
-            android:text="TextView"
-            android:textAlignment="center" />
+            android:layout_below="@id/textView"
+            android:layout_marginBottom="25dp"
+            android:drawablePadding="12dp"
+            android:text="@string/main_favourites"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            app:drawableLeftCompat="@drawable/favorite_icon" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/search_icon"
-            android:text="TextView"
-            android:textAlignment="center" />
+            android:layout_below="@id/textView3"
+            android:layout_marginBottom="25dp"
+            android:drawablePadding="12dp"
+            android:text="@string/main_search"
+            android:textAlignment="center"
+            android:textSize="45sp"
+            app:drawableLeftCompat="@drawable/search_icon" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/add_circle"
-        app:tint="@color/design_default_color_secondary" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="6dp"
+        android:src="@drawable/add_circle" />
 
-</LinearLayout>
+</RelativeLayout>

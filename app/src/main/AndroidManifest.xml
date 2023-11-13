@@ -13,12 +13,30 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Add_EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlacesToTryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FavouritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllRestaurantsListActivity"
+            android:exported="false" />
+        <activity
             android:name=".AboutActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-
+            android:exported="false"
+            android:label="Lists" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
