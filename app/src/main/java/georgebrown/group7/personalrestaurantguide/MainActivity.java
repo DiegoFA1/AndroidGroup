@@ -56,26 +56,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     // Menu

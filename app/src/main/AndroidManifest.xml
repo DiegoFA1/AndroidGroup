@@ -29,6 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".AllRestaurantsListActivity"
+            android:label="All Restaurants"
             android:exported="false" />
         <activity
             android:name=".AboutActivity"
