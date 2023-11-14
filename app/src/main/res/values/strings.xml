@@ -5,6 +5,8 @@
     <string name="main_favourites">Favourites</string>
     <string name="main_search">Places to try</string>
 
+    <string name="search_title">Search</string>
+
     <string name="about_title">Team Members:</string>
     <string name="diego_name">Diego Fuentes</string>
     <string name="hiu_name">Hiu Wai Lau</string>
