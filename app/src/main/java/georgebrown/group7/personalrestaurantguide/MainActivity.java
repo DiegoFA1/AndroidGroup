@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         addRestaurantimg.setOnClickListener(v -> {
-            Intent add_restaurant_intent = new Intent(this,Add_EditActivity.class);
+            Intent add_restaurant_intent = new Intent(this, AddEditActivity.class);
             startActivity(add_restaurant_intent);
         });
 

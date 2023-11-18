@@ -19,7 +19,7 @@
             android:name=".MapActivity"
             android:exported="false" />
         <activity
-            android:name=".Add_EditActivity"
+            android:name=".AddEditActivity"
             android:exported="false" />
         <activity
             android:name=".DetailsActivity"
