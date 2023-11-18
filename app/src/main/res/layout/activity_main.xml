@@ -43,18 +43,6 @@
             android:textSize="45sp"
             app:drawableLeftCompat="@drawable/favorite_icon" />
 
-        <TextView
-            android:id="@+id/more_restaurants_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/favorite_restaurants_txt"
-            android:layout_marginBottom="25dp"
-            android:drawablePadding="12dp"
-            android:text="@string/main_search"
-            android:textAlignment="center"
-            android:textSize="45sp"
-            app:drawableLeftCompat="@drawable/search_icon" />
-
     </RelativeLayout>
 
     <ImageView

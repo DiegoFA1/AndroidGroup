@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class AllRestaurantsListActivity extends AppCompatActivity {
 
@@ -22,5 +23,15 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.map_allrest_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.back_button) {
+            finish();
+            return true;
+        }
+        return false;
+
     }
 }

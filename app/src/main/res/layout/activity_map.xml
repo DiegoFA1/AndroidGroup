@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="visible"
     tools:context=".MainActivity">
 
@@ -16,7 +17,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/all_restaurants_toolbar"
         android:gravity="center|center_vertical"
         android:orientation="vertical">
 
