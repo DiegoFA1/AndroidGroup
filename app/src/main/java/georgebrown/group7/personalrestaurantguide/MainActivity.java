@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         allRestaurantstxt = findViewById(R.id.all_restaurants_txt);
         favoriteRestauranttxt = findViewById(R.id.favorite_restaurants_txt);
-        moreRestaurantstxt = findViewById(R.id.more_restaurants_txt);
         addRestaurantimg = findViewById(R.id.add_restaurant_img);
 
         allRestaurantstxt.setOnClickListener(v -> {
@@ -45,13 +44,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(favorite_restaurants_intent);
         });
 
-        moreRestaurantstxt.setOnClickListener(v -> {
-            Intent more_restaurants_intent = new Intent(this, PlacesToTryActivity.class);
-            startActivity(more_restaurants_intent);
-        });
-
         addRestaurantimg.setOnClickListener(v -> {
-            Intent add_restaurant_intent = new Intent(this,Add_EditActivity.class);
+            Intent add_restaurant_intent = new Intent(this, AddEditActivity.class);
             startActivity(add_restaurant_intent);
         });
 
