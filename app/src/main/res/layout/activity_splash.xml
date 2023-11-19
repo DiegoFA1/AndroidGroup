@@ -4,8 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
-    android:background="@drawable/placeholder">
+    android:background="@drawable/placeholder"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:id="@+id/imageViewSplash"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/baseline_fastfood_24" />
+
+    <EditText
+        android:id="@+id/splash_editTextText"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="254dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Meals"
+        android:textSize="34sp" />
 
 
 </RelativeLayout>

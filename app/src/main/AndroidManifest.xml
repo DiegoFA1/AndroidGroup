@@ -24,9 +24,7 @@
         <activity
             android:name=".DetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".PlacesToTryActivity"
-            android:exported="false" />
+
         <activity
             android:name=".FavoritesActivity"
             android:exported="false" />
