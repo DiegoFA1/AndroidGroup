@@ -24,7 +24,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="56dp">
+        android:layout_marginTop="56dp"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
@@ -36,17 +37,119 @@
 
         </androidx.appcompat.widget.SearchView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="10dp">
+            <!-- RecyclerView -->
+            <!-- 1st column: Item and Sub Item -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Item 1 -->
+                <TextView
+                    android:id="@+id/itemName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurant Name 1"
+                    android:textStyle="bold" />
+
+                <!-- Sub Item 1 -->
+                <TextView
+                    android:id="@+id/subItemName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address 1" />
+            </LinearLayout>
+
+            <!-- 2nd column: Heart item -->
+            <ImageView
+                android:id="@+id/heartIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/favorite_icon" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <!-- Item 1 -->
+                <TextView
+                    android:id="@+id/itemName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurant Name 2"
+                    android:textStyle="bold"/>
+
+                <!-- Sub Item 1 -->
+                <TextView
+                    android:id="@+id/subItemName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address 2"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/heartIcon2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/favorite_icon" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <!-- Item 1 -->
+                <TextView
+                    android:id="@+id/itemName3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurant Name 3"
+                    android:textStyle="bold"/>
+
+                <!-- Sub Item 1 -->
+                <TextView
+                    android:id="@+id/subItemName3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address 3"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/heartIcon3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/favorite_icon"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:layout_width="407dp"
-        android:layout_height="512dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="73dp" />
 
     <ImageView
         android:id="@+id/add_restaurant_img"
