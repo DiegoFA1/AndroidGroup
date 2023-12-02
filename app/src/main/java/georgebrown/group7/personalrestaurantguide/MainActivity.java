@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView moreRestaurantstxt;
 
     private ImageView addRestaurantimg;
+
+    private DbManager dbManager;
 
 
 
@@ -49,7 +55,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(add_restaurant_intent);
         });
 
+        dbManager = new DbManager(this);
+        dbManager.open();
+        Cursor c = dbManager.fetch();
 
+        if(c==null || c.isAfterLast()){
+            Log.d("DATABASE","database empty, adding data");
+            addData();
+        }
     }
 
     // Menu
@@ -70,5 +83,13 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    void addData(){
+        /*
+        restaurants.add(new Restaurant("Restaurant A", "Address A", "1234567890", "Description A", "Tag1,Tag2", 4.0f));
+        restaurants.add(new Restaurant("Restaurant B", "Address B", "0987654321", "Description B", "Tag3,Tag4", 3.5f));
+         */
+        dbManager.insert("Restaurant A","Address A","1234567890","Description A","Tag1,Tag2",4.0f);
+        dbManager.insert("Restaurant B","Address B","0987654321","Description B","Tag3,Tag4",3.5f);
+    }
 
 }

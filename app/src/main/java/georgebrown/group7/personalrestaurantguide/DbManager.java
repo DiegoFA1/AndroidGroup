@@ -25,10 +25,14 @@ public class DbManager {
         dbHelper.close();
     }
 
-    public long insert(String name, String desc){
+    public long insert(String name, String desc, String address, String phone, String tags, float rating){
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
+        cv.put(DbHelper.ADDRESS,desc);
+        cv.put(DbHelper.PHONE,desc);
+        cv.put(DbHelper.TAGS,desc);
+        cv.put(String.valueOf(DbHelper.RATING),desc);
 
         // id of object added
         long id = db.insert(DbHelper.TABLE_NAME, null, cv);
@@ -54,6 +58,10 @@ public class DbManager {
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
+        cv.put(DbHelper.ADDRESS,desc);
+        cv.put(DbHelper.PHONE,desc);
+        cv.put(DbHelper.TAGS,desc);
+        cv.put(String.valueOf(DbHelper.RATING),desc);
 
         int i = db.update(DbHelper.TABLE_NAME, cv,
                 DbHelper._ID+" = ?",new String[]{String.valueOf(id)});

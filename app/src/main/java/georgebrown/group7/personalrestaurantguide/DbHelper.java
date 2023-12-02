@@ -21,18 +21,16 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "RestaurantDb.db";
     public static final int DB_VERSION = 1;
 
-    public static final String CREATE_TABLE;
+    public static final String CREATE_TABLE =
+            "create table "+TABLE_NAME+" ("+
+                    _ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    NAME+" TEXT NOT NULL, "+
+                    ADDRESS+" TEXT NOT NULL, "+
+                    PHONE+" TEXT NOT NULL, "+
+                    TAGS+" TEXT NOT NULL, "+
+                    RATING+"  REAL NOT NULL, "+
+                    DESC+" TEXT)";
 
-    static {
-        CREATE_TABLE = "create table " + TABLE_NAME + " (" +
-                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                NAME + " TEXT NOT NULL, " +
-                ADDRESS + " TEXT NOT NULL, " +
-                PHONE + " TEXT NOT NULL, " +
-                TAGS + " TEXT NOT NULL, " +
-                RATING + " FLOAT NOT NULL, " +
-                DESC + " TEXT)";
-    }
 
     // CONSTRUCTOR
     public DbHelper(Context c){

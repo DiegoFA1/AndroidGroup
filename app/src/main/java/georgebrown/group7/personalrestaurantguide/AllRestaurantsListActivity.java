@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +26,16 @@ import java.util.List;
 public class AllRestaurantsListActivity extends AppCompatActivity {
     private List<Restaurant> restaurantList;
     private RecyclerView recyclerView;
+
+    private DbManager dbManager;
+
+    // values to go into the cursor adapter
+    final String[] from = new String[]{DbHelper.NAME,
+            DbHelper.ADDRESS,String.valueOf(DbHelper.RATING)};
+
+    // restaurant_list.xml
+    final int[] to = new int[]{R.id.restaurant_name,
+            R.id.restaurant_address,R.id.rating_bar};
 
     private ImageView addRestaurantImg;
     private ActivityResultLauncher<Intent> addRestaurantLauncher;
@@ -80,11 +91,21 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
     }
 
     private List<Restaurant> getRestaurantList() {
-        List<Restaurant> restaurants = new ArrayList<>();
-        // Sample restaurants (you can modify or add more here)
-        restaurants.add(new Restaurant("Restaurant A", "Address A", "1234567890", "Description A", "Tag1,Tag2", 4.0f));
-        restaurants.add(new Restaurant("Restaurant B", "Address B", "0987654321", "Description B", "Tag3,Tag4", 3.5f));
-        return restaurants;
+        List<Restaurant> restaurantList = new ArrayList<>();
+        dbManager = new DbManager(this);
+        dbManager.open();
+        Cursor c = dbManager.fetch();
+
+
+        while (!c.isAfterLast()) {
+            Restaurant restaurant = new Restaurant();
+            restaurant.setName(c.getString(c.getColumnIndexOrThrow(DbHelper.NAME)));
+            restaurant.setAddress(c.getString(c.getColumnIndexOrThrow(DbHelper.ADDRESS)));
+            restaurant.setPhone(c.getString(c.getColumnIndexOrThrow(DbHelper.PHONE)));
+            restaurantList.add(restaurant);
+            c.moveToNext();
+        }
+        return restaurantList;
     }
 
     private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {

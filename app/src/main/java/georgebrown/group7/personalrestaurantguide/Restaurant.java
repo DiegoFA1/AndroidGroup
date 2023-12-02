@@ -11,6 +11,33 @@ public class Restaurant implements Parcelable {
     private String tags;
     private float rating;
 
+    public Restaurant() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
     public Restaurant(String name, String address, String phone, String description, String tags, float rating) {
         this.name = name;
         this.address = address;
