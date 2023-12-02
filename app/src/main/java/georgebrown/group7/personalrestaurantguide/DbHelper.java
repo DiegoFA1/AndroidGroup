@@ -14,7 +14,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String PHONE = "phone";
     public static final String TAGS = "tags";
 
-    public static final float RATING = 0;
+    public static final String RATING = "rating";
     public static final String DESC = "description";
 
     //name of file
@@ -27,8 +27,8 @@ public class DbHelper extends SQLiteOpenHelper {
                     NAME+" TEXT NOT NULL, "+
                     ADDRESS+" TEXT NOT NULL, "+
                     PHONE+" TEXT NOT NULL, "+
-                    TAGS+" TEXT NOT NULL, "+
-                    RATING+"  REAL NOT NULL, "+
+                    TAGS+" TEXT NOT NULL,"+
+                    RATING+" REAL NOT NULL, "+
                     DESC+" TEXT)";
 
 
