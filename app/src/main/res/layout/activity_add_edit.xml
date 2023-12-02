@@ -32,13 +32,13 @@
             android:layout_gravity="center"/>
 
         <EditText
-            android:id="@+id/editTextName"
+            android:id="@+id/editTextRestaurantName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"/>
 
         <EditText
-            android:id="@+id/editTextAddress"
+            android:id="@+id/editTextRestaurantAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Address"/>
@@ -50,7 +50,7 @@
             android:hint="Phone"/>
 
         <EditText
-            android:id="@+id/editTextDescription"
+            android:id="@+id/editTextRestaurantDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"/>
