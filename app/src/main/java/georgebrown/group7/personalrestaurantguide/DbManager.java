@@ -29,10 +29,10 @@ public class DbManager {
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
-        cv.put(DbHelper.ADDRESS,desc);
-        cv.put(DbHelper.PHONE,desc);
-        cv.put(DbHelper.TAGS,desc);
-        cv.put(String.valueOf(DbHelper.RATING),desc);
+        cv.put(DbHelper.ADDRESS,address);
+        cv.put(DbHelper.PHONE,phone);
+        cv.put(DbHelper.TAGS,tags);
+        cv.put(String.valueOf(DbHelper.RATING),rating);
 
         // id of object added
         long id = db.insert(DbHelper.TABLE_NAME, null, cv);
@@ -55,14 +55,14 @@ public class DbManager {
     }
 
     // return number of rows updated
-    public int update(long id, String name, String desc){
+    public int update(long id, String name, String desc, String address, String phone, String tags, float rating){
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
-        cv.put(DbHelper.ADDRESS,desc);
-        cv.put(DbHelper.PHONE,desc);
-        cv.put(DbHelper.TAGS,desc);
-        cv.put(String.valueOf(DbHelper.RATING),desc);
+        cv.put(DbHelper.ADDRESS,address);
+        cv.put(DbHelper.PHONE,phone);
+        cv.put(DbHelper.TAGS,tags);
+        cv.put(String.valueOf(DbHelper.RATING),rating);
 
         int i = db.update(DbHelper.TABLE_NAME, cv,
                 DbHelper._ID+" = ?",new String[]{String.valueOf(id)});
