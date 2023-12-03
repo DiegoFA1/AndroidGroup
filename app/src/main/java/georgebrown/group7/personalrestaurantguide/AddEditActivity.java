@@ -31,6 +31,10 @@ public class AddEditActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         buttonSave = findViewById(R.id.buttonSave);
 
+        // Initialize DbManager
+        dbManager = new DbManager(this);
+        dbManager.open();
+
         // Set click listener for save button
         buttonSave.setOnClickListener(v -> onSaveButtonClicked());
 
@@ -50,10 +54,10 @@ public class AddEditActivity extends AppCompatActivity {
         // Insert data into the database
         long id = dbManager.insert(restaurantName, description, restaurantAddress, phone, tags, rating);
 
-        // Pass the new restaurant data back to the calling activity
-//        Intent resultIntent = new Intent();
-//        resultIntent.putExtra("newRestaurant", newRestaurant);
-//        setResult(RESULT_OK, resultIntent);
+         //Pass the new restaurant data back to the calling activity
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("newRestaurantId", id);
+        setResult(RESULT_OK, resultIntent);
 
         // Finish the activity
         finish();
