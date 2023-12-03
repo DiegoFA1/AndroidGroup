@@ -2,11 +2,13 @@ package georgebrown.group7.personalrestaurantguide;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -99,6 +101,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
 
         while (!c.isAfterLast()) {
             Restaurant restaurant = new Restaurant();
+
             restaurant.setName(c.getString(c.getColumnIndexOrThrow(DbHelper.NAME)));
             restaurant.setAddress(c.getString(c.getColumnIndexOrThrow(DbHelper.ADDRESS)));
             restaurant.setRating(c.getFloat(c.getColumnIndexOrThrow(DbHelper.RATING)));
@@ -126,6 +129,25 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
         public void onBindViewHolder(RestaurantViewHolder holder, int position) {
             Restaurant restaurant = restaurantList.get(position);
             holder.bind(restaurant);
+            holder.itemView.setOnClickListener(v -> {
+                // Open DetailsRestaurantActivity for displaying restaurant details
+                Intent detailsIntent = new Intent(v.getContext(), DetailsActivity.class);
+                detailsIntent.putExtra("restaurant", restaurant);
+                v.getContext().startActivity(detailsIntent);
+            });
+
+            holder.editIcon.setOnClickListener(v -> {
+                // Open AddEditActivity for editing the restaurant
+                Intent editIntent = new Intent(v.getContext(), AddEditActivity.class);
+                // Pass the restaurant data to the AddEditActivity for editing
+                editIntent.putExtra("restaurant", restaurant);
+                v.getContext().startActivity(editIntent);
+            });
+
+            holder.deleteIcon.setOnClickListener(v -> {
+                // Show a delete confirmation dialog
+                showDeleteDialog(v.getContext(), position);
+            });
         }
 
         @Override
@@ -133,10 +155,29 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             return restaurantList.size();
         }
 
+        private void showDeleteDialog(Context context, int position) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Are you sure you want to delete this restaurant?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        // Delete the restaurant from the list and notify adapter
+                        restaurantList.remove(position);
+                        notifyItemRemoved(position);
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
         public class RestaurantViewHolder extends RecyclerView.ViewHolder {
             private TextView restaurantNameTextView;
             private TextView restaurantAddressTextView;
             private RatingBar ratingBar;
+            private ImageView editIcon;
+            private ImageView deleteIcon;
+
+
 
             public RestaurantViewHolder(View itemView) {
                 super(itemView);
@@ -144,6 +185,10 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 restaurantAddressTextView = itemView.findViewById(R.id.restaurant_address);
                 ratingBar = itemView.findViewById(R.id.rating_bar);
                 ratingBar.setIsIndicator(true);
+                editIcon = itemView.findViewById(R.id.edit_icon);
+                deleteIcon = itemView.findViewById(R.id.delete_icon);
+                deleteIcon.setOnClickListener(v -> showDeleteDialog(itemView.getContext(), getAdapterPosition()));
+
             }
 
             public void bind(Restaurant restaurant) {
@@ -151,6 +196,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 restaurantAddressTextView.setText(restaurant.getAddress());
                 ratingBar.setRating(restaurant.getRating());
             }
+
         }
     }
 
