@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Restaurant implements Parcelable {
 
-    private int id;
+    private long id;
     private String name;
     private String address;
     private String phone;
@@ -18,8 +18,12 @@ public class Restaurant implements Parcelable {
     public Restaurant() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public boolean isFavourite() {

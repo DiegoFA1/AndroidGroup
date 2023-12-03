@@ -138,8 +138,11 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 // Open AddEditActivity for editing the restaurant
                 Intent editIntent = new Intent(v.getContext(), AddEditActivity.class);
                 // Pass the restaurant data to the AddEditActivity for editing
-                editIntent.putExtra("restaurant", restaurant);
+                editIntent.putExtra("restaurantId", restaurant.getId());
                 v.getContext().startActivity(editIntent);
+                // After the edit is complete, refresh the list
+
+
             });
 
             holder.deleteIcon.setOnClickListener(v -> {

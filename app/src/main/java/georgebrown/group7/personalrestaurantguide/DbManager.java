@@ -45,6 +45,24 @@ public class DbManager {
         return id;
     }
 
+    // Return a single record
+    public Cursor fetchById(long id){
+        String[] cols = new String[]{DbHelper._ID, DbHelper.NAME, DbHelper.ADDRESS,
+                DbHelper.PHONE, DbHelper.TAGS, String.valueOf(DbHelper.RATING),
+                String.valueOf(DbHelper.ISFAVORITE), DbHelper.DESC};
+        Cursor c = db.query(DbHelper.TABLE_NAME, cols,
+                DbHelper._ID+" = ?",new String[]{String.valueOf(id)},
+                null,null,null);
+
+        // prepare cursor
+        if (c!=null){
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+
     // Return the cursor
     public Cursor fetch(){
         String[] cols = new String[]{DbHelper._ID, DbHelper.NAME, DbHelper.ADDRESS,

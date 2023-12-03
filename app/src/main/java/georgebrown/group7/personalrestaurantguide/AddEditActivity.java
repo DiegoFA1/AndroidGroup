@@ -2,7 +2,9 @@ package georgebrown.group7.personalrestaurantguide;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +37,25 @@ public class AddEditActivity extends AppCompatActivity {
         dbManager = new DbManager(this);
         dbManager.open();
 
+        // Check if Restaurant is being edited
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("restaurantId");
+        if (intent.hasExtra("restaurantId")) {
+            Log.d("AddEditActivity", "Restaurant is being edited");
+            long restaurantId = intent.getLongExtra("restaurantId", -1);
+            if (restaurantId != -1) {
+                // Set the data on the view to the data from the database
+                Cursor cursor = dbManager.fetchById(restaurantId);
+                if (cursor != null) {
+                    editTextRestaurantName.setText(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.NAME)));
+                    editTextRestaurantAddress.setText(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.ADDRESS)));
+                    editTextPhone.setText(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.PHONE)));
+                    editTextRestaurantDescription.setText(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.DESC)));
+                    editTextTags.setText(cursor.getString(cursor.getColumnIndexOrThrow(DbHelper.TAGS)));
+                    ratingBar.setRating(cursor.getFloat(cursor.getColumnIndexOrThrow(String.valueOf(DbHelper.RATING))));
+                }
+            }
+        }
         // Set click listener for save button
         buttonSave.setOnClickListener(v -> onSaveButtonClicked());
 
@@ -52,14 +73,29 @@ public class AddEditActivity extends AppCompatActivity {
         String tags = editTextTags.getText().toString().trim();
         boolean defaultFavorite = false;
         float rating = ratingBar.getRating();
-        // Insert data into the database
-        long id = dbManager.insert(restaurantName, description, restaurantAddress, phone, tags, rating, defaultFavorite);
 
-         //Pass the new restaurant data back to the calling activity
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("newRestaurantId", id);
-        setResult(RESULT_OK, resultIntent);
+        // Check if Restaurant is being edited
+        Intent intent = getIntent();
+        if (intent.hasExtra("restaurantId")) {
+            long restaurantId = intent.getLongExtra("restaurantId", -1);
+            if (restaurantId != -1) {
+                // Set the data on the view to the data from the database
+                dbManager.update(restaurantId, restaurantName, description, restaurantAddress, phone, tags, rating, defaultFavorite);
 
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("restaurantId", restaurantId);
+                setResult(RESULT_OK, resultIntent);
+            }
+        }
+        else {
+            long id = dbManager.insert(restaurantName, description, restaurantAddress, phone, tags, rating, defaultFavorite);
+
+            //Pass the new restaurant data back to the calling activity
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("newRestaurantId", id);
+            setResult(RESULT_OK, resultIntent);
+
+        }
         // Finish the activity
         finish();
     }
