@@ -41,7 +41,8 @@ public class DbManager {
 
     // Return the cursor
     public Cursor fetch(){
-        String[] cols = new String[]{DbHelper._ID,DbHelper.NAME,DbHelper.DESC};
+        String[] cols = new String[]{DbHelper.NAME, DbHelper.ADDRESS,
+                DbHelper.PHONE, DbHelper.TAGS, String.valueOf(DbHelper.RATING)};
         Cursor c = db.query(DbHelper.TABLE_NAME, cols,
                 null,null,null,null,null);
 

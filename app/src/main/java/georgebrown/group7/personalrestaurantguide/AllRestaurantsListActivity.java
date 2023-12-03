@@ -101,7 +101,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             Restaurant restaurant = new Restaurant();
             restaurant.setName(c.getString(c.getColumnIndexOrThrow(DbHelper.NAME)));
             restaurant.setAddress(c.getString(c.getColumnIndexOrThrow(DbHelper.ADDRESS)));
-            restaurant.setPhone(c.getString(c.getColumnIndexOrThrow(DbHelper.PHONE)));
+            restaurant.setRating(c.getFloat(c.getColumnIndexOrThrow(DbHelper.RATING)));
             restaurantList.add(restaurant);
             c.moveToNext();
         }
