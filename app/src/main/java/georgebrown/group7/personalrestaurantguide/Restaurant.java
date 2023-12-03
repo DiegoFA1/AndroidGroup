@@ -4,14 +4,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Restaurant implements Parcelable {
+
+    private int id;
     private String name;
     private String address;
     private String phone;
     private String description;
     private String tags;
+
+    private boolean isFavourite;
     private float rating;
 
     public Restaurant() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -38,14 +58,17 @@ public class Restaurant implements Parcelable {
         this.rating = rating;
     }
 
-    public Restaurant(String name, String address, String phone, String description, String tags, float rating) {
+    public Restaurant(int id, String name, String address, String phone, String description, String tags, boolean isFavourite, float rating) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.description = description;
         this.tags = tags;
+        this.isFavourite = isFavourite;
         this.rating = rating;
     }
+
     protected Restaurant(Parcel in) {
         name = in.readString();
         address = in.readString();

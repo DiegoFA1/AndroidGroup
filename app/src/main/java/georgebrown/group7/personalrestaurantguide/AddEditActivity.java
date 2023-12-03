@@ -50,9 +50,10 @@ public class AddEditActivity extends AppCompatActivity {
         String phone = editTextPhone.getText().toString().trim();
         String description = editTextRestaurantDescription.getText().toString().trim();
         String tags = editTextTags.getText().toString().trim();
+        boolean defaultFavorite = false;
         float rating = ratingBar.getRating();
         // Insert data into the database
-        long id = dbManager.insert(restaurantName, description, restaurantAddress, phone, tags, rating);
+        long id = dbManager.insert(restaurantName, description, restaurantAddress, phone, tags, rating, defaultFavorite);
 
          //Pass the new restaurant data back to the calling activity
         Intent resultIntent = new Intent();

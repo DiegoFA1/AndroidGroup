@@ -84,12 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void addData(){
-        /*
-        restaurants.add(new Restaurant("Restaurant A", "Address A", "1234567890", "Description A", "Tag1,Tag2", 4.0f));
-        restaurants.add(new Restaurant("Restaurant B", "Address B", "0987654321", "Description B", "Tag3,Tag4", 3.5f));
-         */
-        dbManager.insert("Restaurant A","Address A","1234567890","Description A","Tag1,Tag2",4.0f);
-        dbManager.insert("Restaurant B","Address B","0987654321","Description B","Tag3,Tag4",3.5f);
+        dbManager.insert("Restaurant A","Address A","1234567890","Description A","Tag1,Tag2",4.0f,false);
+        dbManager.insert("Restaurant B","Address B","0987654321","Description B","Tag3,Tag4",3.5f,true);
     }
 
 }

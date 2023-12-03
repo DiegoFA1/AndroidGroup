@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,14 +31,6 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private DbManager dbManager;
-
-    // values to go into the cursor adapter
-    final String[] from = new String[]{DbHelper.NAME,
-            DbHelper.ADDRESS,String.valueOf(DbHelper.RATING)};
-
-    // restaurant_list.xml
-    final int[] to = new int[]{R.id.restaurant_name,
-            R.id.restaurant_address,R.id.rating_bar};
 
     private ImageView addRestaurantImg;
     private ActivityResultLauncher<Intent> addRestaurantLauncher;
@@ -102,9 +95,14 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
         while (!c.isAfterLast()) {
             Restaurant restaurant = new Restaurant();
 
+            restaurant.setId(c.getInt(c.getColumnIndexOrThrow(DbHelper._ID)));
             restaurant.setName(c.getString(c.getColumnIndexOrThrow(DbHelper.NAME)));
             restaurant.setAddress(c.getString(c.getColumnIndexOrThrow(DbHelper.ADDRESS)));
             restaurant.setRating(c.getFloat(c.getColumnIndexOrThrow(DbHelper.RATING)));
+            restaurant.setPhone(c.getString(c.getColumnIndexOrThrow(DbHelper.PHONE)));
+            restaurant.setDescription(c.getString(c.getColumnIndexOrThrow(DbHelper.DESC)));
+            restaurant.setTags(c.getString(c.getColumnIndexOrThrow(DbHelper.TAGS)));
+            restaurant.setFavourite(c.getInt(c.getColumnIndexOrThrow(DbHelper.ISFAVORITE)) == 1);
             restaurantList.add(restaurant);
             c.moveToNext();
         }
@@ -160,6 +158,8 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             builder.setMessage("Are you sure you want to delete this restaurant?")
                     .setPositiveButton("Delete", (dialog, which) -> {
                         // Delete the restaurant from the list and notify adapter
+                        dbManager.delete(restaurantList.get(position).getId());
+                        Log.d("DATABASE", "Restaurant deleted"+restaurantList.get(position).getId());
                         restaurantList.remove(position);
                         notifyItemRemoved(position);
                         dialog.dismiss();

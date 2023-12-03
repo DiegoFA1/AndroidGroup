@@ -17,9 +17,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RATING = "rating";
     public static final String DESC = "description";
 
+    public static final String ISFAVORITE = "isFavorite";
+
     //name of file
     static final String DB_NAME = "RestaurantDb.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 4;
 
     public static final String CREATE_TABLE =
             "create table "+TABLE_NAME+" ("+
@@ -29,6 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     PHONE+" TEXT NOT NULL, "+
                     TAGS+" TEXT NOT NULL,"+
                     RATING+" REAL NOT NULL, "+
+                    ISFAVORITE+" INTEGER NOT NULL, "+
                     DESC+" TEXT)";
 
 

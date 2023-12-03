@@ -25,7 +25,7 @@ public class DbManager {
         dbHelper.close();
     }
 
-    public long insert(String name, String desc, String address, String phone, String tags, float rating){
+    public long insert(String name, String desc, String address, String phone, String tags, float rating, boolean isFavorite){
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
@@ -34,6 +34,12 @@ public class DbManager {
         cv.put(DbHelper.TAGS,tags);
         cv.put(String.valueOf(DbHelper.RATING),rating);
 
+        if (isFavorite) {
+            cv.put(String.valueOf(DbHelper.ISFAVORITE), 1);
+        } else {
+            cv.put(String.valueOf(DbHelper.ISFAVORITE), 0);
+        }
+
         // id of object added
         long id = db.insert(DbHelper.TABLE_NAME, null, cv);
         return id;
@@ -41,8 +47,9 @@ public class DbManager {
 
     // Return the cursor
     public Cursor fetch(){
-        String[] cols = new String[]{DbHelper.NAME, DbHelper.ADDRESS,
-                DbHelper.PHONE, DbHelper.TAGS, String.valueOf(DbHelper.RATING)};
+        String[] cols = new String[]{DbHelper._ID, DbHelper.NAME, DbHelper.ADDRESS,
+                DbHelper.PHONE, DbHelper.TAGS, String.valueOf(DbHelper.RATING),
+                String.valueOf(DbHelper.ISFAVORITE), DbHelper.DESC};
         Cursor c = db.query(DbHelper.TABLE_NAME, cols,
                 null,null,null,null,null);
 
@@ -55,14 +62,20 @@ public class DbManager {
     }
 
     // return number of rows updated
-    public int update(long id, String name, String desc, String address, String phone, String tags, float rating){
+    public int update(long id, String name, String desc, String address, String phone, String tags, float rating, boolean isFavorite){
         ContentValues cv = new ContentValues();
         cv.put(DbHelper.NAME, name);
         cv.put(DbHelper.DESC,desc);
         cv.put(DbHelper.ADDRESS,address);
         cv.put(DbHelper.PHONE,phone);
         cv.put(DbHelper.TAGS,tags);
+        if (isFavorite) {
+            cv.put(String.valueOf(DbHelper.ISFAVORITE), 1);
+        } else {
+            cv.put(String.valueOf(DbHelper.ISFAVORITE), 0);
+        }
         cv.put(String.valueOf(DbHelper.RATING),rating);
+
 
         int i = db.update(DbHelper.TABLE_NAME, cv,
                 DbHelper._ID+" = ?",new String[]{String.valueOf(id)});
