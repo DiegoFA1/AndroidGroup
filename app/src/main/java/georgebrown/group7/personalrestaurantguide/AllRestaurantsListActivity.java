@@ -81,8 +81,17 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        return false;
+        try {
+            if (item.getItemId() == R.id.about_button) {
+                Intent map_intent = new Intent(this,MapActivity.class);
+                startActivity(map_intent);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return false;
     }
 
     private List<Restaurant> getRestaurantList() {
