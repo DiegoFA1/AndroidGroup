@@ -16,4 +16,10 @@
         android:icon="@drawable/baseline_share_24"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/map_icon"
+        android:icon="@drawable/map_icon"
+    android:title="Map"
+    app:showAsAction="ifRoom"/>
+
 </menu>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,8 @@ public class DetailsActivity extends AppCompatActivity {
 
     private TextView textViewName, textViewAddress, textViewPhone, textViewDescription, textViewTags;
     private RatingBar ratingBar;
+    private double destinationLat; // Latitude of the destination
+    private double destinationLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,9 @@ public class DetailsActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_share) {
             shareRestaurantDetails();
             return true;
+        }else if (item.getItemId() == R.id.map_icon) {
+            openMapForDirections(destinationLat, destinationLng);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -96,6 +102,16 @@ public class DetailsActivity extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(DetailsActivity.this,
                     "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void openMapForDirections(double destinationLat, double destinationLng) {
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + destinationLat + "," + destinationLng);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Toast.makeText(this, "Google Maps app is not installed.", Toast.LENGTH_LONG).show();
         }
     }
 
