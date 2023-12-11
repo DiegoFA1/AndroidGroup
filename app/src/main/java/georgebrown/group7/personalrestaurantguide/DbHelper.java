@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //name of file
     static final String DB_NAME = "RestaurantDb.db";
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 8;
 
     public static final String CREATE_TABLE =
             "create table "+TABLE_NAME+" ("+

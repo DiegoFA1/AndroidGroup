@@ -150,14 +150,13 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 editIntent.putExtra("restaurantId", restaurant.getId());
                 v.getContext().startActivity(editIntent);
                 // After the edit is complete, refresh the list
-
-
             });
 
             holder.deleteIcon.setOnClickListener(v -> {
                 // Show a delete confirmation dialog
                 showDeleteDialog(v.getContext(), position);
             });
+
         }
 
         @Override
@@ -182,12 +181,15 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             dialog.show();
         }
 
+
+
         public class RestaurantViewHolder extends RecyclerView.ViewHolder {
             private TextView restaurantNameTextView;
             private TextView restaurantAddressTextView;
             private RatingBar ratingBar;
             private ImageView editIcon;
             private ImageView deleteIcon;
+
 
 
 
@@ -200,6 +202,8 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 editIcon = itemView.findViewById(R.id.edit_icon);
                 deleteIcon = itemView.findViewById(R.id.delete_icon);
                 deleteIcon.setOnClickListener(v -> showDeleteDialog(itemView.getContext(), getAdapterPosition()));
+
+
 
             }
 

@@ -102,6 +102,7 @@ public class DbManager {
         return i;
     }
 
+
     public int delete(long id){
         int i = db.delete(DbHelper.TABLE_NAME,
                 DbHelper._ID+" = ?",new String[]{String.valueOf(id)});
