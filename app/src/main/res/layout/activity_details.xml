@@ -29,6 +29,16 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/mapIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map_icon"
+            android:contentDescription="@string/map_icon_description"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:onClick="onMapIconClicked"/>
+
 
         <TextView
             android:id="@+id/textViewRestaurantName"

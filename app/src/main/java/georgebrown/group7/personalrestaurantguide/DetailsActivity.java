@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -18,8 +19,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private TextView textViewName, textViewAddress, textViewPhone, textViewDescription, textViewTags;
     private RatingBar ratingBar;
-    private double destinationLat; // Latitude of the destination
-    private double destinationLng;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +68,6 @@ public class DetailsActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_share) {
             shareRestaurantDetails();
             return true;
-        }else if (item.getItemId() == R.id.map_icon) {
-            openMapForDirections(destinationLat, destinationLng);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -104,8 +101,17 @@ public class DetailsActivity extends AppCompatActivity {
                     "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
-    private void openMapForDirections(double destinationLat, double destinationLng) {
-        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + destinationLat + "," + destinationLng);
+    // Method called when the map icon is clicked
+    public void onMapIconClicked(View view) {
+        // Fetch restaurant address
+        String address = textViewAddress.getText().toString();
+
+        // Open Google Maps for directions
+        openMapForDirections(address);
+    }
+
+    private void openMapForDirections(String address) {
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + Uri.encode(address));
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
