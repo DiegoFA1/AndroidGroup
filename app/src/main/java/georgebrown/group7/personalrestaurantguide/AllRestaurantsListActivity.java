@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,24 +76,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.back_button) {
-            finish();
-            return true;
-        }
-        try {
-            if (item.getItemId() == R.id.about_button) {
-                Intent map_intent = new Intent(this,MapActivity.class);
-                startActivity(map_intent);
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return false;
-    }
 
     private List<Restaurant> getRestaurantList() {
         List<Restaurant> restaurantList = new ArrayList<>();
@@ -111,7 +95,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             restaurant.setPhone(c.getString(c.getColumnIndexOrThrow(DbHelper.PHONE)));
             restaurant.setDescription(c.getString(c.getColumnIndexOrThrow(DbHelper.DESC)));
             restaurant.setTags(c.getString(c.getColumnIndexOrThrow(DbHelper.TAGS)));
-            restaurant.setFavourite(c.getInt(c.getColumnIndexOrThrow(DbHelper.ISFAVORITE)) == 1);
+            restaurant.setFavorite(c.getInt(c.getColumnIndexOrThrow(DbHelper.ISFAVORITE)) == 1);
             restaurantList.add(restaurant);
             c.moveToNext();
         }
@@ -156,6 +140,17 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 // Show a delete confirmation dialog
                 showDeleteDialog(v.getContext(), position);
             });
+            // Set the heart icon based on isFavorite
+            holder.heartIcon.setImageResource(restaurant.isFavorite() ? R.drawable.is_favourite_selected : R.drawable.favorite_icon);
+
+            holder.heartIcon.setOnClickListener(v -> {
+                boolean isFav = restaurant.isFavorite();
+                restaurant.setFavorite(!isFav);
+                dbManager.updateFavoriteStatus(restaurant.getId(), !isFav);
+                notifyItemChanged(position);
+            });
+
+
 
         }
 
@@ -189,6 +184,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
             private RatingBar ratingBar;
             private ImageView editIcon;
             private ImageView deleteIcon;
+            private ImageView heartIcon;
 
 
 
@@ -199,6 +195,7 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
                 restaurantAddressTextView = itemView.findViewById(R.id.restaurant_address);
                 ratingBar = itemView.findViewById(R.id.rating_bar);
                 ratingBar.setIsIndicator(true);
+                heartIcon = itemView.findViewById(R.id.heart_icon);
                 editIcon = itemView.findViewById(R.id.edit_icon);
                 deleteIcon = itemView.findViewById(R.id.delete_icon);
                 deleteIcon.setOnClickListener(v -> showDeleteDialog(itemView.getContext(), getAdapterPosition()));
@@ -215,5 +212,49 @@ public class AllRestaurantsListActivity extends AppCompatActivity {
 
         }
     }
+
+    private String getRestaurantsListString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Restaurant restaurant : restaurantList) {
+            stringBuilder.append("Name: ").append(restaurant.getName()).append("\n");
+            stringBuilder.append("Address: ").append(restaurant.getAddress()).append("\n");
+            stringBuilder.append("Rating: ").append(restaurant.getRating()).append("\n\n");
+
+        }
+        return stringBuilder.toString();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.back_button) {
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.action_share) {
+            shareRestaurantsList();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void shareRestaurantsList() {
+        String shareBody = getRestaurantsListString();
+        if (shareBody.isEmpty()) {
+            Toast.makeText(this, "No restaurants to share.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "List of Restaurants");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(AllRestaurantsListActivity.this,
+                    "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }

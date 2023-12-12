@@ -5,25 +5,45 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <!-- Restaurant information -->
+    <!-- Container for Heart Icon, Restaurant Name, Address, and RatingBar -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/restaurant_name"
-            android:layout_width="wrap_content"
+        <!-- Container for Heart Icon and Restaurant Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
+            <!-- Heart Icon -->
+            <ImageView
+                android:id="@+id/heart_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/favorite_icon"
+                android:contentDescription="@string/heart_icon_description"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Restaurant Name -->
+            <TextView
+                android:id="@+id/restaurant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <!-- Restaurant Address -->
         <TextView
             android:id="@+id/restaurant_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <!-- RatingBar -->
         <RatingBar
             android:id="@+id/rating_bar"
             android:layout_width="wrap_content"
@@ -37,16 +57,12 @@
         android:id="@+id/edit_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/baseline_edit_24" />
+        android:src="@drawable/baseline_edit_24"
+        android:layout_marginEnd="8dp" />
 
     <ImageView
         android:id="@+id/delete_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_delete_24" />
-
-
-
-
 </LinearLayout>

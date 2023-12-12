@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/about_button"
+        android:id="@+id/action_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/map_icon"
-        android:title="map_icon"
+        android:icon="@drawable/ic_share"
+        android:title="Share"
         app:showAsAction="always">
     </item>
 

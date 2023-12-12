@@ -10,7 +10,11 @@
         android:title="back button"
         android:visible="true"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/action_share"
+        android:title="Share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom"/>
 
 
 

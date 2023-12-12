@@ -26,13 +26,16 @@ public class Restaurant implements Parcelable {
         this.id = id;
     }
 
-    public boolean isFavourite() {
+
+
+    public boolean isFavorite() {
         return isFavourite;
     }
 
-    public void setFavourite(boolean favourite) {
+    public void setFavorite(boolean favourite) {
         isFavourite = favourite;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -80,6 +83,7 @@ public class Restaurant implements Parcelable {
         description = in.readString();
         tags = in.readString();
         rating = in.readFloat();
+        isFavourite = in.readByte() != 0;
     }
 
     public String getName() {
@@ -111,7 +115,6 @@ public class Restaurant implements Parcelable {
         public Restaurant createFromParcel(Parcel in) {
             return new Restaurant(in);
         }
-
         @Override
         public Restaurant[] newArray(int size) {
             return new Restaurant[size];
@@ -131,6 +134,7 @@ public class Restaurant implements Parcelable {
         dest.writeString(description);
         dest.writeString(tags);
         dest.writeFloat(rating);
+        dest.writeByte((byte) (isFavourite ? 1 : 0));
     }
 }
 

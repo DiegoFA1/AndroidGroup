@@ -7,6 +7,7 @@
 
     <string name="search_title">Search</string>
     <string name="map_icon_description">Map icon</string>
+    <string name="heart_icon_description">Favourite icon</string>
 
     <string name="about_title">Team Members:</string>
     <string name="diego_name">Diego Fuentes</string>

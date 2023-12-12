@@ -34,6 +34,7 @@ public class DbManager {
         cv.put(DbHelper.TAGS,tags);
         cv.put(String.valueOf(DbHelper.RATING),rating);
 
+
         if (isFavorite) {
             cv.put(String.valueOf(DbHelper.ISFAVORITE), 1);
         } else {
@@ -68,6 +69,7 @@ public class DbManager {
         String[] cols = new String[]{DbHelper._ID, DbHelper.NAME, DbHelper.ADDRESS,
                 DbHelper.PHONE, DbHelper.TAGS, String.valueOf(DbHelper.RATING),
                 String.valueOf(DbHelper.ISFAVORITE), DbHelper.DESC};
+
         Cursor c = db.query(DbHelper.TABLE_NAME, cols,
                 null,null,null,null,null);
 
@@ -77,6 +79,21 @@ public class DbManager {
         }
 
         return c;
+    }
+    public Cursor fetchFavorites() {
+        String[] columns = new String[]{DbHelper._ID, DbHelper.NAME, DbHelper.ADDRESS,
+                DbHelper.PHONE, DbHelper.TAGS, DbHelper.RATING,
+                DbHelper.ISFAVORITE, DbHelper.DESC};
+        String selection = DbHelper.ISFAVORITE + " = ?";
+        String[] selectionArgs = new String[]{"1"}; // Assuming '1' represents true for favorites
+
+        Cursor cursor = db.query(DbHelper.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        return cursor;
     }
 
     // return number of rows updated
@@ -109,5 +126,10 @@ public class DbManager {
         return i;
 
 
+    }
+    public void updateFavoriteStatus(long id, boolean isFavorite) {
+        ContentValues cv = new ContentValues();
+        cv.put(DbHelper.ISFAVORITE, isFavorite ? 1 : 0);
+        db.update(DbHelper.TABLE_NAME, cv, DbHelper._ID + "=?", new String[]{String.valueOf(id)});
     }
 }
