@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void addData(){
-        dbManager.insert("Restaurant A","Address A","1234567890","Description A","Tag1,Tag2",4.0f,false);
-        dbManager.insert("Restaurant B","Address B","0987654321","Description B","Tag3,Tag4",3.5f,true);
+        dbManager.insert("Haidilao Hot Pot","Lunch time will have special price","1571 Sandurst Cir, Scarborough, ON","6477353341","Chinese Cuisine",4.0f,false);
+        dbManager.insert("Bamiyan Kabob","Suggestion: Sultani Kabob with rice","7760 Markham Rd, Markham, ON","9059101043","Afghan Cuisine",3.5f,true);
     }
 
 }
